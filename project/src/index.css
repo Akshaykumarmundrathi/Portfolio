@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --racing-red: #FF1E1E;
+  --racing-blue: #0C1E35;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes car-move {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--racing-red);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d81919;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #2d3748;
+}
