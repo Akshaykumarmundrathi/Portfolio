@@ -16,7 +16,7 @@ const About: React.FC = () => {
             <span className={`border-b-4 border-[#FF1E1E] pb-2`}>About Me</span>
           </h2>
           <p className="text-lg max-w-3xl mx-auto text-gray-500 dark:text-gray-300">
-            Passionate software engineer with expertise in building high-performance applications
+            Passionate Data Analyst with expertise in building high-performance applications
           </p>
         </div>
         

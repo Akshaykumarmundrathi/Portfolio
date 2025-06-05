@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
                     <a href="mailto:your.email@example.com" className="font-medium hover:text-[#FF1E1E] transition-colors">
-                      your.email@example.com
+                      akshay06sep@gmail.com
                     </a>
                   </div>
                 </div>
@@ -64,12 +64,12 @@ const Contact: React.FC = () => {
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">LinkedIn</p>
                     <a 
-                      href="https://linkedin.com/in/yourusername" 
+                      href="https://linkedin.com/in/akshaykumarmundrathi" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="font-medium hover:text-[#FF1E1E] transition-colors"
                     >
-                      linkedin.com/in/yourusername
+                      linkedin.com/in/akshaykumarmundrathi
                     </a>
                   </div>
                 </div>
@@ -81,12 +81,12 @@ const Contact: React.FC = () => {
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">GitHub</p>
                     <a 
-                      href="https://github.com/yourusername" 
+                      href="https://github.com/Akshaykumarmundrathi" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="font-medium hover:text-[#FF1E1E] transition-colors"
                     >
-                      github.com/yourusername
+                      github.com/Akshaykumarmundrathi
                     </a>
                   </div>
                 </div>
@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
                   <div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Resume</p>
                     <a 
-                      href="https://drive.google.com/your-resume-link" 
+                      href="https://drive.google.com/drive/u/0/folders/1TZ1Gzn-fzTS7H9ThyVg3Whjba3EVK6Wa" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="font-medium hover:text-[#FF1E1E] transition-colors"
