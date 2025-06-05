@@ -1,5 +1,5 @@
 import React from 'react';
-import sidenew2 from '../assets/sidenew2.jpg';
+import sidenew2 from '../sidenew2.jpg';
 import { Code, Zap, RefreshCw } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
