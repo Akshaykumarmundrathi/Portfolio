@@ -28,12 +28,12 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
           <div className="relative h-10 w-10 bg-[#FF1E1E] flex items-center justify-center rounded-full">
-            <span className="text-white font-bold text-lg">SE</span>
+            <span className="text-white font-bold text-lg">DA</span>
             <div className="absolute inset-0 bg-[#FF1E1E] rounded-full animate-pulse opacity-30"></div>
           </div>
           <span className="ml-3 font-bold text-xl">
-            <span className={`${theme === 'dark' ? 'text-blue' : 'text-[#0C1E35]'}`}>Software</span>
-            <span className="text-[#FF1E1E]">Engineer</span>
+            <span className={`${theme === 'dark' ? 'text-blue' : 'text-[#0C1E35]'}`}>Data</span>
+            <span className="text-[#FF1E1E]">Analyst</span>
           </span>
         </div>
 
