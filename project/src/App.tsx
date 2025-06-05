@@ -7,7 +7,7 @@ import Projects from './sections/Projects';
 import Skills from './sections/Skills';
 import Experience from './sections/Experience';
 import Contact from './sections/Contact';
-
+import sidenew2 from '../assests/sidenew2.jpg';
 function App() {
   return (
     <ThemeProvider>
