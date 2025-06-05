@@ -1,4 +1,5 @@
 import React from 'react';
+import sidenew2 from '../assets/sidenew2.jpg';
 import { Code, Zap, RefreshCw } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -26,7 +27,7 @@ const About: React.FC = () => {
             <div className="relative mx-auto w-64 h-64 rounded-full overflow-hidden border-4 border-[#FF1E1E]">
               {/* Placeholder image from Pexels */}
               <img 
-                src="C:\Users\akshay\Downloads\project-20250524T221236Z-1-001\project\sidenew2.jpg" 
+                src={sidenew2} 
                 alt="Profile" 
                 className="w-full h-full object-cover"
               />
