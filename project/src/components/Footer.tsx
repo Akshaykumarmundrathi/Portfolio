@@ -13,11 +13,11 @@ const Footer: React.FC = () => {
           <div className="mb-4 md:mb-0">
             <div className="flex items-center">
               <div className="h-8 w-8 bg-[#FF1E1E] flex items-center justify-center rounded-full">
-                <span className="text-white font-bold text-sm">SE</span>
+                <span className="text-white font-bold text-sm">DA</span>
               </div>
               <span className="ml-2 font-bold text-lg">
-                <span className={theme === 'dark' ? 'text-white' : 'text-[#0C1E35]'}>Software</span>
-                <span className="text-[#FF1E1E]">Engineer</span>
+                <span className={theme === 'dark' ? 'text-white' : 'text-[#0C1E35]'}>Data</span>
+                <span className="text-[#FF1E1E]">Analyst</span>
               </span>
             </div>
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           
           <div className="flex space-x-4">
             <a 
-              href="https://linkedin.com/in/yourusername" 
+              href="https://linkedin.com/in/akshaykumarmundrathi" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
               <Linkedin size={20} className="text-[#0077B5]" />
             </a>
             <a 
-              href="https://github.com/yourusername" 
+              href="https://github.com/Akshaykumarmundrathi" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
               <Github size={20} className={theme === 'dark' ? 'text-white' : 'text-black'} />
             </a>
             <a 
-              href="https://drive.google.com/your-resume-link" 
+              href="https://drive.google.com/drive/u/0/folders/1TZ1Gzn-fzTS7H9ThyVg3Whjba3EVK6Wa" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
               <FileText size={20} className="text-[#FF1E1E]" />
             </a>
             <a 
-              href="mailto:your.email@example.com" 
+              href="mailto:akshay06sep@gmail.com" 
               className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
               aria-label="Email"
             >
