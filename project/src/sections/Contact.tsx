@@ -19,7 +19,7 @@ const Contact: React.FC = () => {
     e.preventDefault();
     // In a real application, this would send the form data to a backend
     console.log('Form submitted:', formState);
-    alert('Thank you for your message! This is a demo, so no actual message was sent.');
+    alert('Thank you for your message! ');
     setFormState({ name: '', email: '', message: '' });
   };
   
