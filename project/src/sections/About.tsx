@@ -55,10 +55,16 @@ const About: React.FC = () => {
           {/* Right column - Bio */}
           <div className="w-full md:w-2/3 md:pl-12">
             <p className="text-lg mb-6 text-red-600 dark:text-red-300">
-              Hello! I'm Akshay, a Data Scientist and Engineer with a Master’s in Computer Science and hands-on experience in building scalable data pipelines, predictive modeling, and cloud-based analytics. I specialize in extracting insights from complex datasets, automating ETL workflows, and deploying machine learning models to drive data-driven business decisions.
+              Hello! I'm Akshay, a Data Scientist and Engineer with a Master’s in Computer Science and 
+              hands-on experience in building scalable data pipelines, predictive modeling, and cloud-based analytics. 
+              I specialize in extracting insights from complex datasets, automating ETL workflows, and deploying 
+              machine learning models to drive data-driven business decisions.
             </p>
             <p className="text-lg mb-6 text-red-600 dark:text-red-300">
-              My work spans predictive analytics, deep learning, and end-to-end data engineering—from raw data ingestion to actionable insights. I thrive in collaborative environments, enjoy mentoring peers, and am passionate about leveraging the latest technologies to solve real-world problems. Let’s connect and explore how we can transform data into value together!
+              My work spans predictive analytics, deep learning, and end-to-end data engineering—from raw data ingestion 
+              to actionable insights. I thrive in collaborative environments, enjoy mentoring peers, and am passionate about
+              leveraging the latest technologies to solve real-world problems. Let’s connect and explore how we can transform
+              data into value together!
             </p>
             
                         
