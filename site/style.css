@@ -219,8 +219,8 @@ a { color: var(--water); }
 .skill h3 { margin-bottom: 0.2rem; }
 .skill-motto { font-size: 0.85rem; opacity: 0.75; margin-bottom: 0.7rem; font-style: italic; }
 .skill ul { list-style: none; }
-.skill li { padding: 0.25rem 0; font-size: 0.95rem; }
-.skill li::before { content: "— "; opacity: 0.5; }
+.skill li { padding: 0.25rem 0 0.25rem 1.4em; font-size: 0.95rem; position: relative; }
+.skill li::before { content: "—"; opacity: 0.5; position: absolute; left: 0; }
 
 .water-card h3 { color: #9cc9e8; }
 .earth-card h3 { color: #aed191; }
