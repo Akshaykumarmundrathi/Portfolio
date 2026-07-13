@@ -21,6 +21,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 4.6rem; }
 
 body {
   font-family: var(--font-body);
@@ -55,8 +56,25 @@ a { color: var(--water); }
   font-size: 1.3rem;
   text-decoration: none;
   color: var(--fire);
+  display: flex;
+  align-items: center;
+  height: 38px;
 }
-.nav-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+.nav-brand-photo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--fire);
+  display: none;
+}
+.nav.past-photo .nav-brand-photo { display: block; animation: brandPop 0.35s ease; }
+.nav.past-photo .nav-brand-text { display: none; }
+@keyframes brandPop {
+  from { opacity: 0; transform: scale(0.4) rotate(-25deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+.nav-links { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 .nav-links a {
   text-decoration: none;
   color: var(--ink-soft);
@@ -64,6 +82,13 @@ a { color: var(--water); }
   font-size: 0.92rem;
 }
 .nav-links a:hover { color: var(--fire); }
+.nav-links a.nav-resume {
+  background: var(--fire);
+  color: #fff;
+  padding: 0.32rem 0.85rem;
+  border-radius: 999px;
+}
+.nav-links a.nav-resume:hover { background: #8a2a20; color: #fff; }
 
 /* ============ HERO ============ */
 .hero {
@@ -93,6 +118,26 @@ a { color: var(--water); }
 .el.earth { color: var(--earth); }
 .el.fire  { color: var(--fire); }
 .el.air   { color: var(--air); }
+
+.hero-photo-ring {
+  width: 192px;
+  height: 192px;
+  margin: 1.2rem auto 1rem;
+  border-radius: 50%;
+  padding: 7px;
+  background: conic-gradient(from -45deg,
+    var(--air) 0 25%, var(--water) 25% 50%,
+    var(--earth) 50% 75%, var(--fire) 75% 100%);
+  box-shadow: 0 8px 26px rgba(60, 45, 20, 0.28);
+}
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--parchment);
+  display: block;
+}
 
 .hero-tag {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
@@ -211,21 +256,88 @@ a { color: var(--water); }
   gap: 1.2rem;
 }
 .skill {
+  position: relative;
+  overflow: hidden;
   border-radius: var(--radius);
-  padding: 1.3rem;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  padding: 1.5rem 1.35rem 1.4rem;
+  border: 2px solid transparent;
+  color: #f4ecda;
+  transition: transform 0.25s ease;
 }
-.skill h3 { margin-bottom: 0.2rem; }
-.skill-motto { font-size: 0.85rem; opacity: 0.75; margin-bottom: 0.7rem; font-style: italic; }
-.skill ul { list-style: none; }
+.skill:hover { transform: translateY(-5px); }
+.skill h3 { margin-bottom: 0.2rem; position: relative; z-index: 1; }
+.skill-motto { font-size: 0.85rem; opacity: 0.85; margin-bottom: 0.7rem; font-style: italic; position: relative; z-index: 1; }
+.skill ul { list-style: none; position: relative; z-index: 1; }
 .skill li { padding: 0.25rem 0 0.25rem 1.4em; font-size: 0.95rem; position: relative; }
-.skill li::before { content: "—"; opacity: 0.5; position: absolute; left: 0; }
+.skill li::before { content: "—"; opacity: 0.6; position: absolute; left: 0; }
+.skill::after {
+  position: absolute;
+  right: -18px;
+  bottom: -28px;
+  font-size: 7rem;
+  line-height: 1;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
 
-.water-card h3 { color: #9cc9e8; }
-.earth-card h3 { color: #aed191; }
-.fire-card h3  { color: #f0a08f; }
-.air-card h3   { color: #f2c880; }
+/* — Water: flowing current — */
+.water-card {
+  background:
+    linear-gradient(115deg, transparent 0 32%, rgba(255, 255, 255, 0.09) 40% 48%, transparent 56% 100%),
+    linear-gradient(165deg, #0c3550 0%, #17567c 48%, #2e86ab 100%);
+  background-size: 260% 100%, 100% 100%;
+  border-color: #7fc4e8;
+  box-shadow: 0 8px 26px rgba(28, 108, 158, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  animation: waterFlow 8s linear infinite;
+}
+.water-card::after { content: "🌊"; }
+.water-card h3 { color: #a8dcf5; }
+.water-card li::before { color: #8fd0f0; }
+@keyframes waterFlow {
+  from { background-position: 130% 0, 0 0; }
+  to   { background-position: -130% 0, 0 0; }
+}
+
+/* — Earth: solid stone slab — */
+.earth-card {
+  background:
+    repeating-linear-gradient(-35deg, transparent 0 26px, rgba(0, 0, 0, 0.09) 26px 27px),
+    linear-gradient(165deg, #26331b 0%, #3d5527 55%, #567636 100%);
+  border-color: #9dbd6d;
+  box-shadow: 0 9px 0 -3px #18200f, 0 16px 26px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.earth-card::after { content: "⛰️"; }
+.earth-card h3 { color: #bfdd97; }
+.earth-card li::before { color: #a9cc78; }
+
+/* — Fire: breathing embers — */
+.fire-card {
+  background: linear-gradient(165deg, #400f09 0%, #7c2015 55%, #b03a24 100%);
+  border-color: #f2a06b;
+  animation: emberPulse 3.4s ease-in-out infinite;
+}
+.fire-card::after { content: "🔥"; }
+.fire-card h3 { color: #ffb59c; }
+.fire-card li::before { color: #f5a37e; }
+@keyframes emberPulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(222, 92, 40, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+  50%      { box-shadow: 0 8px 42px rgba(245, 125, 55, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+}
+
+/* — Air: drifting breeze — */
+.air-card {
+  background: linear-gradient(165deg, #6d4f1d 0%, #a4782b 55%, #cf9d3e 100%);
+  border-color: #f3d48c;
+  box-shadow: 0 8px 26px rgba(210, 165, 70, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.air-card::after { content: "🌪️"; animation: airDrift 7s ease-in-out infinite; }
+.air-card h3 { color: #ffe3a1; }
+.air-card li::before { color: #f0d391; }
+@keyframes airDrift {
+  0%, 100% { transform: rotate(-6deg) translateY(0); }
+  50%      { transform: rotate(9deg) translateY(-9px); }
+}
 
 /* ============ CONTACT ============ */
 .contact-wrap {
@@ -290,4 +402,6 @@ a { color: var(--water); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .zoom { transform: none; opacity: 1; transition: none; }
+  .water-card, .fire-card, .air-card::after,
+  .nav.past-photo .nav-brand-photo { animation: none !important; }
 }
