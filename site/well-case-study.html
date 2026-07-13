@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study — Digitizing a Century of Oklahoma Well Records</title>
+  <meta name="description" content="How 571,446 scanned well records (1911–2024) became a live, self-correcting well map — OCR, computer vision, U-Net, PLSS resolution, and human-in-the-loop machinery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="case.css" />
+</head>
+<body class="case-page">
+
+  <!-- ======= NAV ======= -->
+  <nav class="nav">
+    <a href="index.html" class="nav-brand"><span class="nav-brand-text">← AKM</span></a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#chronicle">Chronicle</a>
+      <a href="#findings">Findings</a>
+      <a href="#lessons">Lessons</a>
+      <a href="https://akshaykumarmundrathi.github.io/osu-well-pipeline/" target="_blank" rel="noopener" class="nav-resume nav-map">🗺️ Live Map ↗</a>
+    </div>
+  </nav>
+
+  <!-- ======= HERO ======= -->
+  <header id="top" class="hero case-hero">
+    <div class="hero-inner zoom">
+      <p class="section-kicker earth-text">Case Study · Book of Earth</p>
+      <h1>Digitizing a Century of<br />Oklahoma Well Records</h1>
+      <p class="hero-tag">
+        571,446 scanned PDFs (1911–2024) → a live, self-correcting well map —
+        built by one graduate student and an AI coding agent on a 7.4&nbsp;GB laptop.
+      </p>
+      <p class="case-affil">
+        Oklahoma State University, Boone Pickens School of Geology · DOE Award DE-FE0032362
+        (Anadarko Basin Carbon Management Hub) · Data: Devon Energy · May–July 2026
+      </p>
+
+      <div class="stat-strip">
+        <div class="stat"><span class="stat-num">571,446</span><span class="stat-label">scanned records</span></div>
+        <div class="stat"><span class="stat-num">113</span><span class="stat-label">years of forms</span></div>
+        <div class="stat"><span class="stat-num">51,559</span><span class="stat-label">wells live on the map</span></div>
+        <div class="stat"><span class="stat-num">77/77</span><span class="stat-label">counties covered</span></div>
+        <div class="stat"><span class="stat-num">247</span><span class="stat-label">commits</span></div>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-earth" href="https://akshaykumarmundrathi.github.io/osu-well-pipeline/" target="_blank" rel="noopener">🗺️ Explore the live map</a>
+        <a class="btn btn-fire" href="https://github.com/Akshaykumarmundrathi/osu-well-pipeline" target="_blank" rel="noopener">View the repository</a>
+      </div>
+      <p class="scroll-hint">▼ the earth remembers everything — scroll</p>
+    </div>
+  </header>
+
+  <!-- ======= THE PROBLEM ======= -->
+  <section id="problem" class="section section-parchment">
+    <div class="zoom">
+      <p class="section-kicker earth-text">Chapter One</p>
+      <h2>The Problem</h2>
+      <p class="case-prose">
+        Oklahoma's oil- and gas-well completions are documented on "1002A" forms. Roughly
+        <strong>571,446</strong> of them survive only as scanned PDFs spanning <strong>113 years</strong>
+        of changing layouts — typed, handwritten, stamped, skewed, faded. Buried in each is the
+        well's location: a county, a Section–Township–Range legal description, and on most forms
+        a hand-drawn dot on a "spot well correctly" grid.
+      </p>
+      <div class="case-callout">
+        At even two minutes per record, transcribing the archive by hand is
+        <strong>~9 person-years</strong>. Identifying orphaned, abandoned, and idle wells for
+        carbon-management planning needs those locations as GIS-ready coordinates — so the goal:
+        an automated, validated pipeline with human verification built in.
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= CHRONICLE / TIMELINE ======= -->
+  <section id="chronicle" class="section section-earth">
+    <div class="zoom">
+      <p class="section-kicker earth-text">Chapter Two</p>
+      <h2>The Chronicle of the Build</h2>
+      <p class="section-sub">Nine phases, fifty-nine days, one design law.</p>
+
+      <ol class="timeline">
+        <li><span class="tl-date">May 15–23</span><h3>Foundation</h3>
+          <p>Modular pipeline born: ZIP-native reading, per-record crash recovery, Vision OCR,
+          six-method OpenCV grid detection. First large benchmark on 4,607 records — grid 100%,
+          county 99%, dot 89%.</p></li>
+        <li><span class="tl-date">May 23–31</span><h3>Coordinate Resolution</h3>
+          <p>A 4.56M-cell PLSS PostgreSQL database on AWS RDS; a multi-pass resolver with
+          bilinear interpolation of the hand-drawn dot; portability hardening across the codebase.</p></li>
+        <li><span class="tl-date">May–June</span><h3>U-Net Dot Detector</h3>
+          <p>643 hand-labeled dots train a 192×192 U-Net that replaces brittle classical CV —
+          with regression-gated retraining that can't silently degrade accuracy.</p></li>
+        <li><span class="tl-date">Jun 8–12</span><h3>Hardening Sprints</h3>
+          <p>Every silent crash root-caused to 7.4&nbsp;GB of RAM. Sharded status saves, self-healing
+          watchdogs, run-scoped resume — startup drops 12.6s → 2.1s.</p></li>
+        <li><span class="tl-date">Jun 10–13</span><h3>Human-in-the-Loop</h3>
+          <p>2,781 hand-reviewed forms become per-collection search envelopes. A public Verify/Fix
+          panel on the map feeds a fully autonomous corrections loop: GitHub issue → Action →
+          RDS re-resolution → republish. No human intervention.</p></li>
+        <li><span class="tl-date">Jun 13–16</span><h3>Data Integrity</h3>
+          <p>Seven-way reconciliation — disk ⇄ ZIPs ⇄ index ⇄ tracker ⇄ coordinates ⇄ S3 ⇄ site —
+          deduplicated to one row per record, with non-destructive merge guards after two
+          near-miss data-loss incidents.</p></li>
+        <li class="tl-highlight"><span class="tl-date">Jun 16</span><h3>The Breakthrough</h3>
+          <p>Modern digital-native records carry typed data: county decodes deterministically from
+          the API number, ~31% print exact coordinates. The map jumps
+          <strong>7,163 → 47,253 wells in one day — at $0</strong>.</p></li>
+        <li><span class="tl-date">Jun 16–20</span><h3>Precision &amp; Scale</h3>
+          <p>12,662 wells upgraded to exact printed coordinates; crash-proof chunk-chain campaigns;
+          AWS Batch cloud run designed with a 1,000-vCPU quota approved; AAPG Bulletin manuscript drafted.</p></li>
+        <li><span class="tl-date">Jul 12</span><h3>Today</h3>
+          <p><strong>51,559 wells live</strong> across all 77 counties — each pin linked to its
+          original scan — with ~470K records awaiting the cloud run.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======= ARCHITECTURE ======= -->
+  <section id="architecture" class="section section-parchment">
+    <div class="zoom">
+      <p class="section-kicker earth-text">Chapter Three</p>
+      <h2>Architecture</h2>
+      <p class="section-sub">Five extraction paths, one resumable ledger, everything falls back.</p>
+      <pre class="case-arch"><code>scanned PDF (ZIP / S3)
+  └─ PDFDocumentManager (cached page renders, 2× resolution)
+       ├─ latlong/   printed coordinates (decimal + DMS) — modern forms
+       ├─ grid/      anchor phrase → measured-envelope crop → CV ensemble
+       │               └─ era-aware form classifier
+       ├─ location/  STR extraction (per-era recipes → zones → full page)
+       ├─ county/    structural anchors → fuzzy match → Gemini fallback
+       └─ dot/       U-Net segmentation → PLSS quarter-quarter label
+  └─ processing_status.csv   (44-column resumable tracker)
+  └─ coord/plss_resolver     (RDS, 5-pass, county-pinned directions)
+  └─ build_map_data.py       → GitHub Pages interactive map</code></pre>
+      <div class="case-callout law-callout">
+        <strong>The design law, held throughout:</strong> hints and priors <em>bound and order</em>
+        the search — they never terminate it. Every stage has a full-page fallback; suspect
+        detections are flagged, never silently trusted. That's why a century of layout drift
+        degraded results gracefully instead of breaking them.
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= KEY FINDINGS ======= -->
+  <section id="findings" class="section section-dark">
+    <div class="zoom">
+      <p class="section-kicker earth-text">Chapter Four</p>
+      <h2>Key Findings</h2>
+      <p class="section-sub">What half a million documents teach you.</p>
+
+      <div class="finding-grid">
+        <div class="finding"><h3>Route by format era</h3>
+          <p>The archive splits into two regimes: pre-2001 scans need CV + paid OCR; post-2010
+          digital forms carry typed text. Routing by era turned the worst collections (7% grid
+          success) into the best (88–98% mapped, free).</p></div>
+        <div class="finding"><h3>Free OCR fails — and the reason matters</h3>
+          <p>Tesseract scored 0% location agreement on old scans; embedded PDF text 0% on county.
+          Flat text loses page <em>geometry</em> — the extraction problem is spatial, not
+          typographic. Paid document-OCR earns its cost.</p></div>
+        <div class="finding"><h3>The section number is the ceiling</h3>
+          <p>Township and range anchor themselves with direction letters; the section is a bare
+          number whose label OCR drops. Only 44% of legacy records parse a complete STR — the
+          improvement agenda is set by one number.</p></div>
+        <div class="finding"><h3>Ground truth beats heuristics</h3>
+          <p>Mining the PLSS database showed direction is deterministic from county alone in
+          ~59/77 counties — wired into the resolver, and the same insight caught a mirror bug
+          that had flipped ~2,000 wells across the state.</p></div>
+        <div class="finding"><h3>A resolver is a decision tree, not a lookup</h3>
+          <p>Seven ordered strategies run cheapest-first over 4.56M PLSS cells, with a 4-priority
+          direction cascade, soft-overrides of contradicted OCR, batch prefetch (3,500 queries → 2),
+          and section-centroid as an explicitly-labeled last resort.</p></div>
+        <div class="finding"><h3>Constraints shape the engineering</h3>
+          <p>A 7.4&nbsp;GB laptop OOM-killed every resident orchestrator. The surviving pattern —
+          fresh-process 50-record chunks, idempotent via the tracker — ran 35,845-record campaigns
+          crash-free at ~1,000 records/hour.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= HUMANS + COST ======= -->
+  <section id="humans" class="section section-parchment">
+    <div class="zoom">
+      <p class="section-kicker earth-text">Chapter Five</p>
+      <h2>Humans Where They're Irreplaceable</h2>
+      <ul class="case-list">
+        <li><strong>2,781 hand-reviewed forms</strong> → measured per-collection search envelopes — the single biggest accuracy lever (one collection's grid success: 48% → ~100%).</li>
+        <li><strong>Predict-then-correct labeling</strong> — the model proposes, a human accepts or corrects; 643 dot labels feed retraining that must beat the old model to ship.</li>
+        <li><strong>Public corrections loop</strong> — any viewer can compare a pin to its original PDF and submit a fix; a GitHub Action validates, re-resolves, and republishes autonomously.</li>
+        <li><strong>Failure transparency</strong> — per-stage failure CSVs regenerate on every publish, for human eyes.</li>
+      </ul>
+
+      <h2 class="cost-heading">…and What It Cost</h2>
+      <div class="table-wrap">
+        <table class="case-table">
+          <thead><tr><th>Layer</th><th>Choice</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>OCR</td><td>Google Cloud Vision</td><td>~$1.50 / 1,000 images; a 118K-image cache makes re-runs free</td></tr>
+            <tr><td>County cleanup</td><td>Gemini (free tier)</td><td>7-key rotation with bounded backoff</td></tr>
+            <tr><td>Coordinates</td><td>PostGIS on AWS RDS</td><td>4.56M PLSS quarter-quarter cells</td></tr>
+            <tr><td>Storage</td><td>S3</td><td>571,446 PDFs; every map pin links to its scan</td></tr>
+            <tr><td>Compute</td><td>AWS Batch (Fargate)</td><td>1,000-vCPU quota approved — full backlog in ~3 hours</td></tr>
+            <tr><td>Publishing</td><td>GitHub Pages</td><td>Monotonic rebuilds: wells are added, never dropped</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="case-callout">
+        <strong>Spend to date: roughly $70–160.</strong> Finishing the remaining ~470K scans is a
+        ~$1,400 Vision budget — a funding decision, not an engineering one.
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= INCIDENTS & LESSONS ======= -->
+  <section id="lessons" class="section section-earth">
+    <div class="zoom">
+      <p class="section-kicker earth-text">Chapter Six</p>
+      <h2>Scars &amp; Lessons</h2>
+      <p class="section-sub">Every earthbender learns by taking a few hits.</p>
+      <ol class="lesson-list">
+        <li><strong>Two near-miss data losses</strong> — a script truncated the 514K-row tracker to 3,334 rows; another overwrote the coordinates file. Both recovered from backups, both answered with structural guards. <em>At half-million-record scale, merge tooling must be non-destructive by construction.</em></li>
+        <li><strong>A cloud run would have shipped garbage</strong> — the container defaulted to the OCR engine proven inaccurate. Caught in a pre-launch scrutiny pass. <em>Audit runtime defaults against experimental findings before scaling.</em></li>
+        <li><strong>148 counties in a 77-county state</strong> — unnormalized strings split entities on the public map. <em>Normalize at the publishing boundary, not just extraction.</em></li>
+        <li><strong>Memory-kill forensics</strong> — silent Windows deaths traced through event logs to RAM exhaustion. <em>The fix was architectural, not a patch.</em></li>
+        <li><strong>Honest negative results saved money</strong> — the Tesseract and embedded-text pilots returned "no" in hours and prevented a ~$1,500 mistake. <em>Cheap experiments before expensive convictions.</em></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======= TAKEAWAYS + CTA ======= -->
+  <section id="takeaways" class="section section-parchment">
+    <div class="zoom">
+      <p class="section-kicker earth-text">Epilogue</p>
+      <h2>The Six Teachings</h2>
+      <ol class="teaching-list">
+        <li>Route by format era, then optimize per route — the decision worth the most wells per dollar.</li>
+        <li>Spatial context is the moat: document understanding is about <em>where</em> text sits, not just what it says.</li>
+        <li>Hints bound, never gate — fallback-everywhere survives a century of drift.</li>
+        <li>Idempotence + fresh-process chunking turns unreliable hardware into a reliable batch system.</li>
+        <li>Put humans where they're irreplaceable; automate the rest — 2,781 reviewed forms leveraged into half a million records.</li>
+        <li>Reconcile everything to one ledger, or drift will quietly eat correctness.</li>
+      </ol>
+
+      <div class="hero-cta case-end-cta">
+        <a class="btn btn-earth" href="https://akshaykumarmundrathi.github.io/osu-well-pipeline/" target="_blank" rel="noopener">🗺️ See 51,559 wells live</a>
+        <a class="btn btn-fire" href="https://github.com/Akshaykumarmundrathi/osu-well-pipeline" target="_blank" rel="noopener">Read the code</a>
+        <a class="btn btn-water" href="index.html">← Back to portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="footer">
+    <p class="footer-quote">"Neutral jing — you wait and listen before striking." — King Bumi</p>
+    <p>© 2026 Akshay Kumar Mundrathi · Case study written from 247 commits of history</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
