@@ -17,6 +17,19 @@ const observer = new IntersectionObserver(
 
 zoomEls.forEach((el) => observer.observe(el));
 
+// ===== Swap nav brand text for photo once scrolled past the hero portrait =====
+const heroRing = document.querySelector(".hero-photo-ring");
+const nav = document.querySelector(".nav");
+if (heroRing && nav) {
+  new IntersectionObserver(
+    ([entry]) => {
+      const past = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+      nav.classList.toggle("past-photo", past);
+    },
+    { threshold: 0 }
+  ).observe(heroRing);
+}
+
 // ===== Messenger hawk form → mailto =====
 const form = document.getElementById("hawk-form");
 if (form) {
