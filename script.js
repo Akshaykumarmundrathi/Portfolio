@@ -1,3 +1,28 @@
+// ===== Loader: spinning glider staff, hidden once the page is ready =====
+const loader = document.getElementById("loader");
+if (loader) {
+  const hide = () => loader.classList.add("done");
+  if (document.readyState === "complete") {
+    setTimeout(hide, 500);
+  } else {
+    window.addEventListener("load", () => setTimeout(hide, 400));
+  }
+  setTimeout(hide, 2600); // never trap the visitor
+}
+
+// ===== Scroll progress bar (water -> earth -> fire -> air) =====
+const progressBar = document.querySelector(".progress-bar");
+if (progressBar) {
+  const updateProgress = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    progressBar.style.width = (max > 0 ? (doc.scrollTop / max) * 100 : 0) + "%";
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress, { passive: true });
+  updateProgress();
+}
+
 // ===== Zoom-in on scroll =====
 const zoomEls = document.querySelectorAll(".zoom");
 
