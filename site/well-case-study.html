@@ -48,13 +48,13 @@
       <h1>Digitizing a Century of<br />Oklahoma Well Records</h1>
       <p class="hero-tag">
         571,446 scanned PDFs (1911–2024) → a live, self-correcting well map —
-        a research prototype inherited in August 2025 and carried to production
+        a research prototype inherited in July 2025 and carried to production
         scale by one graduate student and an AI coding agent.
       </p>
       <p class="case-affil">
         Oklahoma State University, Boone Pickens School of Geology · DOE Award DE-FE0032362
         (Anadarko Basin Carbon Management Hub) · Data: Devon Energy ·
-        Aug 2025 – Jul 2026 (production repo: 247 commits, May–Jul 2026)
+        Jul 2025 – Jul 2026 (production repo: 247 commits, May–Jul 2026)
       </p>
 
       <div class="stat-strip">
@@ -111,21 +111,33 @@
           quarter-quarter squares), a Colab notebook using Google Vision to detect the
           "spot well" grid, and a single-PDF extraction script with a folium map.
           One document at a time.</p></li>
-        <li><span class="tl-date">Aug – Nov 2025</span><h3>Takeover &amp; Gap Analysis</h3>
-          <p>The current author takes over: months grinding through the inherited notebook and
-          reports. The core diagnosis — the prototype works on <em>one PDF at a time in Colab</em>:
-          no batch processing, no crash recovery, no state tracking, no cloud path. Cloud
-          engineering (AWS, S3, RDS) begins here.</p></li>
+        <li><span class="tl-date">Jul – Nov 2025</span><h3>Takeover &amp; Gap Analysis</h3>
+          <p>A volunteer research request (Jul 12, 2025) is answered with an inheritance: Prof.
+          Jaiswal hands over the prior researcher's materials (Jul 19), and the work is accepted
+          (Jul 20). Months grinding through the inherited notebook follow. The core diagnosis —
+          the prototype works on <em>one PDF at a time in Colab</em>: no batch processing, no
+          crash recovery, no state tracking, no cloud path. Computer vision was brand new to the
+          author; cloud engineering (AWS, S3, RDS) begins here.</p></li>
         <li><span class="tl-date">~Jun – Dec 2025</span><h3>The Database Wall</h3>
           <p>The 4.56M-row parquet PLSS database <strong>cannot be loaded</strong> in any free
           environment — Colab sessions die, local memory falls short, six months of workarounds
           fail. The fix is architectural: move the data to S3 and stand it up as
           PostgreSQL/PostGIS on AWS RDS. The single unlock that makes coordinate resolution
           possible at scale.</p></li>
+        <li><span class="tl-date">Oct 22, 2025</span><h3>First Map Milestone</h3>
+          <p>A standalone extraction pass over the prototype's modern-report outputs — county,
+          Section–Township–Range, and GPS coordinates to spreadsheets — and the <strong>first
+          interactive well map</strong>, published from a predecessor repo and shared with
+          Prof. Jaiswal.</p></li>
         <li><span class="tl-date">Dec 2025</span><h3>The Archive Arrives</h3>
           <p>~571,000 scanned PDFs land in 13 ZIP archives — immediately exposing a century of
           layout variation the single-form prototype had never seen. Months of studying PDF
           structures era by era become the foundation of the era-aware design.</p></li>
+        <li><span class="tl-date">Feb – Mar 2026</span><h3>Poster &amp; Talk</h3>
+          <p>A data-flow overview deck (Feb 10) becomes a plan (Feb 13): the professor gives the
+          talk, the author presents the poster. Iterations through Feb 22, a recorded
+          presentation Feb 23 — then <strong>AAPG Orphaned/Abandoned/Idle/Marginal Wells,
+          Tulsa, March 2026</strong>.</p></li>
         <li><span class="tl-date">May 15–23, 2026</span><h3>Production Build Begins</h3>
           <p>Modular pipeline born: ZIP-native reading, per-record crash recovery, Vision OCR,
           six-method OpenCV grid detection. First large benchmark on 4,607 records — grid 100%,
@@ -133,6 +145,10 @@
         <li><span class="tl-date">May 23–31, 2026</span><h3>Coordinate Resolution</h3>
           <p>A 4.56M-cell PLSS PostgreSQL database on AWS RDS; a multi-pass resolver with
           bilinear interpolation of the hand-drawn dot; portability hardening across the codebase.</p></li>
+        <li><span class="tl-date">Late May 2026</span><h3>First Cloud Batch</h3>
+          <p>The AWS pipeline goes live: 391 processing slices dispatched, <strong>2,439 wells
+          extracted and mapped mid-run</strong> to an S3-hosted viewer — the first proof of
+          cloud-scale execution.</p></li>
         <li><span class="tl-date">May–Jun 2026</span><h3>U-Net Dot Detector</h3>
           <p>643 hand-labeled dots train a 192×192 U-Net that replaces brittle classical CV —
           with regression-gated retraining that can't silently degrade accuracy.</p></li>
