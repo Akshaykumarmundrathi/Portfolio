@@ -59,6 +59,8 @@ a { color: var(--water); }
   display: flex;
   align-items: center;
   height: 38px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .nav-brand-photo {
   width: 36px;
