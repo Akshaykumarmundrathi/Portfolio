@@ -37,7 +37,10 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.15 }
+  // Tiny threshold + small bottom inset: tall sections (e.g. the case-study
+  // timeline) reveal as soon as they meaningfully enter the viewport, instead
+  // of waiting for 15% of a very tall element to be visible.
+  { threshold: 0.03, rootMargin: "0px 0px -40px 0px" }
 );
 
 zoomEls.forEach((el) => observer.observe(el));
