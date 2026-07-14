@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Digitizing a Century of Oklahoma Well Records</title>
-  <meta name="description" content="How 571,446 scanned well records (1911–2024) became a live, self-correcting well map — OCR, computer vision, U-Net, PLSS resolution, and human-in-the-loop machinery." />
+  <title>Case Study: Digitizing a Century of Oklahoma Well Records</title>
+  <meta name="description" content="How 571,446 scanned well records (1911–2024) became a live, self-correcting well map: OCR, computer vision, U-Net, PLSS resolution, and human-in-the-loop machinery." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -52,16 +52,14 @@
       </p>
       <p class="case-affil">
         Oklahoma State University, Boone Pickens School of Geology · DOE Award DE-FE0032362
-        (Anadarko Basin Carbon Management Hub) · Data: Devon Energy ·
-        Jul 2025 – Jul 2026 · one graduate student, one AI coding agent, one 7.4&nbsp;GB laptop
+        (Anadarko Basin Carbon Management Hub) · Data: Devon Energy · Jul 2025 – Jul 2026
       </p>
 
       <div class="stat-strip">
         <div class="stat"><span class="stat-num">571,446</span><span class="stat-label">scanned records</span></div>
         <div class="stat"><span class="stat-num">113</span><span class="stat-label">years of forms</span></div>
         <div class="stat"><span class="stat-num">51,559</span><span class="stat-label">wells live on the map</span></div>
-        <div class="stat"><span class="stat-num">77/77</span><span class="stat-label">counties covered</span></div>
-        <div class="stat"><span class="stat-num">247</span><span class="stat-label">commits</span></div>
+        <div class="stat"><span class="stat-num">77</span><span class="stat-label">counties covered</span></div>
       </div>
 
       <div class="hero-cta">
@@ -79,13 +77,13 @@
       <h2>A Century of Paper</h2>
       <p class="case-prose">
         In 1911, when a crew finished drilling a well in Oklahoma, somebody filled out a form.
-        They typed — or scrawled — the county, the Section–Township–Range legal description,
+        They typed, or scrawled, the county, the Section–Township–Range legal description,
         and marked a dot on a little grid labeled <em>"spot well correctly."</em> Then the form
         went into a drawer. For a hundred and thirteen years, that's how Oklahoma remembered
         where its wells were.
       </p>
       <p class="case-prose">
-        Today, 571,446 of those "1002A" forms survive — as scanned PDFs. Typed, handwritten,
+        Today, 571,446 of those "1002A" forms survive as scanned PDFs. Typed, handwritten,
         stamped, skewed, photocopied, faded. And they matter more than ever: finding orphaned,
         abandoned, and idle wells for carbon-management planning means turning every one of
         those pages into a latitude and longitude a GIS system can use.
@@ -93,7 +91,7 @@
       <div class="case-callout">
         At two minutes per record, transcribing the archive by hand is roughly
         <strong>nine person-years</strong> of work. Nobody was going to do that.
-        The archive needed a machine that could read — and a way for humans to check its work.
+        The archive needed a machine that could read, and a way for humans to check its work.
       </div>
     </div>
   </section>
@@ -113,7 +111,7 @@
       <p class="case-prose">
         <span class="tl-date">Jul 19, 2025</span> &nbsp;The materials arrived: a Colab notebook
         that used Google Vision to find the "spot well" grid, a script that could extract one
-        PDF at a time, a folium map — and one monumental asset, a
+        PDF at a time, a folium map, and one monumental asset: a
         <strong>4,565,504-row PLSS corner-coordinate database</strong> the previous researcher
         had computed from three geospatial sources, down to quarter-quarter squares. I said yes
         the next day.
@@ -121,7 +119,7 @@
       <p class="case-prose">
         I'll be honest about where I stood: computer vision was brand new to me. I knew neural
         networks and Python; I had never made a machine read a stamped, skewed 1930s form. And
-        the diagnosis of what I'd inherited was sobering — a prototype that worked beautifully,
+        the diagnosis of what I'd inherited was sobering: a prototype that worked beautifully,
         <em>one PDF at a time, in Colab</em>. No batch processing. No crash recovery. No state
         tracking. No cloud. Between that prototype and 571,446 documents stood everything
         I was about to spend a year building.
@@ -138,15 +136,15 @@
         The first wall was the database. That beautiful 4.56-million-row PLSS table
         <strong>would not load anywhere I could afford</strong>. Colab sessions died. My laptop's
         memory fell short. For close to six months I tried workaround after workaround, and every
-        one failed. The fix, when it finally came, wasn't a cleverer loading trick — it was a
+        one failed. The fix, when it finally came, wasn't a cleverer loading trick; it was a
         different architecture: move the data to S3, stand it up as PostgreSQL/PostGIS on AWS RDS,
         and query it instead of loading it. That unlock made coordinate resolution possible at
-        scale — and it was my real introduction to cloud engineering.
+        scale, and it was my real introduction to cloud engineering.
       </p>
       <p class="case-prose">
         <span class="tl-date">Oct 22, 2025</span> &nbsp;First win. I ran a standalone extraction
-        pass over the modern reports the prototype produced — county, Section–Township–Range,
-        GPS coordinates, out to spreadsheets — and built the
+        pass over the modern reports the prototype produced: county, Section–Township–Range,
+        GPS coordinates, out to spreadsheets, and built the
         <strong>first interactive well map</strong>, clustered markers on a Folium page,
         published from a little repo called <em>Oklahoma-Well-Locations</em>. I sent it to
         Prof. Jaiswal: <em>"you can click on each well location and see the details."</em>
@@ -155,14 +153,14 @@
       <p class="case-prose">
         <span class="tl-date">Nov – Dec 2025</span> &nbsp;In one of our project talks, the
         professor made the suggestion that changed the pipeline's future: stop hand-annotating
-        the grid dots — render, squint, click, store the row and column, repeat — and
+        the grid dots (render, squint, click, store the row and column, repeat) and
         <strong>teach a model to find them</strong>. At half-a-million-record scale, manual
         annotation was a dead end. I started studying U-Net segmentation that winter.
       </p>
       <p class="case-prose">
         <span class="tl-date">Dec 2025</span> &nbsp;Then the archive itself arrived: thirteen ZIP
         files, ~571,000 scanned PDFs, 1911 to 2024. It immediately exposed the truth the
-        single-form prototype had never faced — <strong>a century of layout drift</strong>.
+        single-form prototype had never faced: <strong>a century of layout drift</strong>.
         Grids in the top-left, bottom-left, top-middle, top-right. Descriptions in headers, in
         blocks, beside the grid. Forms that promised printed coordinates and delivered a blank.
         I spent months just studying where things <em>sit</em> on these pages, era by era.
@@ -170,11 +168,11 @@
       </p>
       <div class="case-callout">
         <span class="tl-date">Feb – Mar 2026</span> &nbsp;<strong>Interlude: Tulsa.</strong>
-        A data-flow deck became a plan — the professor gives the talk, I present the poster:
+        A data-flow deck became a plan: the professor gives the talk, I present the poster:
         <em>"Automated Extraction of Well Coordinates from Oklahoma 1002A Records,"</em>
         at the AAPG 4th Annual Orphan, Abandoned, Idle, and Marginal Wells conference,
         March 2026. The work faced the world for the first time, with the U-Net detector
-        listed — accurately — as ongoing work.
+        listed, accurately, as ongoing work.
         <a class="poster-figure" href="assets/poster-aapg-2026.pdf" target="_blank" rel="noopener" title="Open the full poster PDF in a new tab">
           <img src="assets/poster-aapg-2026-thumb.jpg" alt="AAPG 2026 poster: Automated Extraction of Well Coordinates from Oklahoma 1002A Records" loading="lazy" />
           <span class="poster-figure-hint">🔍 Click to open the full poster (PDF)</span>
@@ -195,14 +193,14 @@
       <h2>Fifty-Nine Days</h2>
       <p class="case-prose">
         <span class="tl-date">May 15, 2026</span> &nbsp;First commit of the production repository.
-        Everything learned since July went into a modular pipeline — five extraction paths, one
-        resumable ledger — and in the first nine days it was benchmarked on 4,607 real records:
+        Everything learned since July went into a modular pipeline: five extraction paths, one
+        resumable ledger. In the first nine days it was benchmarked on 4,607 real records:
         grid detection 100%, county 99%, dot 89%. The architecture is simple to draw and was
         merciless to earn:
       </p>
       <pre class="case-arch"><code>scanned PDF (ZIP / S3)
   └─ PDFDocumentManager (cached page renders, 2× resolution)
-       ├─ latlong/   printed coordinates (decimal + DMS) — modern forms
+       ├─ latlong/   printed coordinates (decimal + DMS) - modern forms
        ├─ grid/      anchor phrase → measured-envelope crop → CV ensemble
        │               └─ era-aware form classifier
        ├─ location/  STR extraction (per-era recipes → zones → full page)
@@ -213,16 +211,16 @@
   └─ build_map_data.py       → GitHub Pages interactive map</code></pre>
       <div class="case-callout law-callout">
         <strong>One design law, held everywhere:</strong> hints and priors <em>bound and order</em>
-        the search — they never terminate it. Every stage has a full-page fallback; suspect
+        the search; they never terminate it. Every stage has a full-page fallback; suspect
         detections are flagged, never silently trusted. This is why a century of layout drift
         degraded results gracefully instead of breaking them.
       </div>
       <p class="case-prose">
-        The build ran on a laptop with <strong>7.4&nbsp;GB of usable RAM</strong>, and the laptop
+        The build ran on an ordinary home laptop, and the laptop
         fought back. Long runs died silently; I traced the deaths through Windows event logs to
         memory exhaustion, not code. The fix was architectural: a near-zero-RAM loop dispatching
         fifty-record chunks as fresh processes, every one idempotent against the status tracker.
-        That pattern ran 35,845-record campaigns crash-free at ~1,000 records an hour — through
+        That pattern ran 35,845-record campaigns crash-free at ~1,000 records an hour, through
         Wi-Fi drops, shutdowns, and restarts. <span class="tl-date">Late May 2026</span> &nbsp;The
         same discipline went to the cloud: a first AWS batch dispatched 391 slices and put
         2,439 wells on an S3-hosted viewer mid-run.
@@ -230,7 +228,7 @@
       <p class="case-prose">
         The scariest moments weren't crashes. A consolidation script once truncated the
         514,000-row tracker to 3,334 rows; an enrichment step overwrote the coordinates file.
-        Both recovered from backups — and both were answered structurally: additive-only merges,
+        Both recovered from backups, and both were answered structurally: additive-only merges,
         monotonic map builds, and a full seven-way reconciliation
         (disk ⇄ ZIPs ⇄ index ⇄ tracker ⇄ coordinates ⇄ S3 ⇄ site) so every record exists exactly
         once, everywhere.
@@ -245,19 +243,19 @@
       <h2>The Day the Map Exploded</h2>
       <p class="case-prose">
         <span class="tl-date">Jun 16, 2026</span> &nbsp;The best decision of the project cost
-        nothing. Staring at the "worst" collections — modern records where grid detection
-        succeeded just 7% of the time — the realization landed: <strong>these aren't scans of
+        nothing. Staring at the "worst" collections (modern records where grid detection
+        succeeded just 7% of the time), the realization landed: <strong>these aren't scans of
         paper, they're digital-native documents.</strong> The county is decodable from the API
         number, deterministically (<code>35-011</code> → Blaine). The legal description is typed
         text. And about 31% print their exact coordinates. They never needed computer vision
-        at all — they needed to be <em>routed differently</em>.
+        at all; they needed to be <em>routed differently</em>.
       </p>
       <p class="case-prose">
-        Routing by era turned the worst collections into the best — 88–98% mapped, for free,
+        Routing by era turned the worst collections into the best: 88–98% mapped, for free,
         in minutes. The map jumped from <strong>7,163 wells to 47,253 wells in a single day,
         at $0</strong>. In the days after: 12,662 wells upgraded to exact printed coordinates,
         and a ground-truth pass against the PLSS database caught a systematic mirror bug that
-        had flipped ~2,000 wells to the wrong side of the state — direction, it turns out, is
+        had flipped ~2,000 wells to the wrong side of the state; direction, it turns out, is
         deterministic from the county alone in most of Oklahoma.
       </p>
 
@@ -265,11 +263,11 @@
       <div class="finding-grid">
         <div class="finding"><h3>The problem is spatial, not typographic</h3>
           <p>Free OCR scored 0% location agreement on old scans; embedded PDF text, 0% on county
-          despite "95% text coverage." Flat text loses page <em>geometry</em> — you can't tell
+          despite "95% text coverage." Flat text loses page <em>geometry</em>: you can't tell
           the well's county from the operator's address without knowing where the words sit.</p></div>
         <div class="finding"><h3>One bare number is the ceiling</h3>
           <p>Township and range anchor themselves with direction letters; the section is a bare
-          number whose label OCR drops. Only 44% of legacy records parse a complete STR — the
+          number whose label OCR drops. Only 44% of legacy records parse a complete STR; the
           entire improvement agenda hangs on reading one number better.</p></div>
         <div class="finding"><h3>A resolver is a decision tree, not a lookup</h3>
           <p>Seven strategies run cheapest-first over 4.56M PLSS cells, a four-priority direction
@@ -285,18 +283,18 @@
       <p class="section-kicker earth-text">Book of Earth · Chapter Five</p>
       <h2>The Map That Fixes Itself</h2>
       <p class="case-prose">
-        Automation got the wells onto the map. Humans keep them honest — placed exactly where
+        Automation got the wells onto the map. Humans keep them honest, placed exactly where
         they're irreplaceable, and nowhere else.
       </p>
       <ul class="case-list">
-        <li><strong>2,781 hand-reviewed forms</strong> became measured per-collection search envelopes — the single biggest accuracy lever in the pipeline (one collection's grid success went from 48% to ~100%).</li>
-        <li><strong>Predict-then-correct labeling</strong> — the U-Net proposes, a human accepts or corrects; 643 dot labels feed retraining that must beat the old model to ship.</li>
-        <li><strong>A public corrections loop</strong> — anyone viewing the map can compare a pin against its original scanned PDF and submit a fix; a GitHub Action validates it, re-resolves coordinates against RDS, and republishes the site. No human intervention required.</li>
-        <li><strong>Failure transparency</strong> — per-stage failure CSVs regenerate on every publish, so nothing wrong hides.</li>
+        <li><strong>2,781 hand-reviewed forms</strong> became measured per-collection search envelopes, the single biggest accuracy lever in the pipeline (one collection's grid success went from 48% to ~100%).</li>
+        <li><strong>Predict-then-correct labeling</strong>: the U-Net proposes, a human accepts or corrects; 643 dot labels feed retraining that must beat the old model to ship.</li>
+        <li><strong>A public corrections loop</strong>: anyone viewing the map can compare a pin against its original scanned PDF and submit a fix; a GitHub Action validates it, re-resolves coordinates against RDS, and republishes the site. No human intervention required.</li>
+        <li><strong>Failure transparency</strong>: per-stage failure CSVs regenerate on every publish, so nothing wrong hides.</li>
       </ul>
       <p class="case-prose">
         Today the map holds <strong>51,559 wells across all 77 counties</strong>, every pin
-        linked to the original scan it came from — a living dataset that grows as eras are
+        linked to the original scan it came from, a living dataset that grows as eras are
         processed and corrections land.
       </p>
 
@@ -309,14 +307,14 @@
             <tr><td>County cleanup</td><td>Gemini (free tier)</td><td>7-key rotation with bounded backoff</td></tr>
             <tr><td>Coordinates</td><td>PostGIS on AWS RDS</td><td>4.56M PLSS quarter-quarter cells</td></tr>
             <tr><td>Storage</td><td>S3</td><td>571,446 PDFs; every map pin links to its scan</td></tr>
-            <tr><td>Compute</td><td>AWS Batch (Fargate)</td><td>1,000-vCPU quota approved — full backlog in ~3 hours</td></tr>
+            <tr><td>Compute</td><td>AWS Batch (Fargate)</td><td>1,000-vCPU quota approved; full backlog in ~3 hours</td></tr>
             <tr><td>Publishing</td><td>GitHub Pages</td><td>Monotonic rebuilds: wells are added, never dropped</td></tr>
           </tbody>
         </table>
       </div>
       <div class="case-callout">
         <strong>Spend to date: roughly $600</strong> (≈$300 Google Vision + ≈$300 AWS
-        storage/RDS). Finishing the remaining scans is a ~$1,570 Vision budget — a funding
+        storage/RDS). Finishing the remaining scans is a ~$1,570 Vision budget: a funding
         decision, not an engineering one.
       </div>
     </div>
@@ -327,15 +325,15 @@
     <div class="zoom">
       <p class="section-kicker earth-text">Book of Earth · Chapter Six</p>
       <h2>What the Earth Taught</h2>
-      <p class="section-sub">Every lesson here was paid for — a scar first, a principle second.</p>
+      <p class="section-sub">Every lesson here was paid for: a scar first, a principle second.</p>
       <ol class="lesson-list">
         <li><strong>Six months stuck on a database that wouldn't load.</strong> The fix wasn't a cleverer loading trick; it was moving the computation to the data (S3 + PostGIS on RDS). <em>That wall is the moment a prototype must become infrastructure.</em></li>
-        <li><strong>The extraction problem is spatial, not typographic.</strong> Two rigorous pilots said "no" to free OCR and embedded text — hours spent, and a ~$1,500 mistake prevented. <em>Cheap experiments before expensive convictions; honest negative results are profit.</em></li>
+        <li><strong>The extraction problem is spatial, not typographic.</strong> Two rigorous pilots said "no" to free OCR and embedded text: hours spent, and a ~$1,500 mistake prevented. <em>Cheap experiments before expensive convictions; honest negative results are profit.</em></li>
         <li><strong>Route by format era, then optimize per route.</strong> The single decision worth the most wells per dollar cost nothing but the willingness to re-see the data. <em>Look at what the documents are, not what the pipeline assumes.</em></li>
-        <li><strong>Two near-miss data losses.</strong> A truncated 514K-row tracker, an overwritten coordinates file — both recovered, both answered with additive-only merges and monotonic builds. <em>At half-million-record scale, merge tooling must be non-destructive by construction.</em></li>
+        <li><strong>Two near-miss data losses.</strong> A truncated 514K-row tracker, an overwritten coordinates file; both recovered, both answered with additive-only merges and monotonic builds. <em>At half-million-record scale, merge tooling must be non-destructive by construction.</em></li>
         <li><strong>A cloud run almost shipped garbage.</strong> The container defaulted to the OCR engine the experiments had rejected; a pre-launch scrutiny pass caught it. <em>Audit runtime defaults against your own findings before scaling.</em></li>
         <li><strong>The site showed 148 counties in a 77-county state.</strong> Unnormalized strings split entities on the public map. <em>Normalize at the publishing boundary, not just at extraction.</em></li>
-        <li><strong>Hints bound, never gate — and humans go where they're irreplaceable.</strong> Measured envelopes ordered the search without ever ending it, and 2,781 human-reviewed forms leveraged into half a million records. <em>Fallback-everywhere survives a century of drift; one reconciled ledger keeps it true.</em></li>
+        <li><strong>Hints bound, never gate; and humans go where they're irreplaceable.</strong> Measured envelopes ordered the search without ever ending it, and 2,781 human-reviewed forms leveraged into half a million records. <em>Fallback-everywhere survives a century of drift; one reconciled ledger keeps it true.</em></li>
       </ol>
     </div>
   </section>
@@ -346,7 +344,7 @@
       <p class="section-kicker earth-text">Book of Earth · Epilogue</p>
       <h2>The Story Isn't Over</h2>
       <p class="case-prose">
-        ~470K legacy scans await the designed AWS Batch run — image build and Vision budget are
+        ~470K legacy scans await the designed AWS Batch run; image build and Vision budget are
         the only gates. Three annotation campaigns are queued for free accuracy gains, the U-Net
         goes back to school on 1926–40 hollow-circle well marks, and an <em>AAPG Bulletin</em>
         manuscript is drafted. The map grows; the corrections loop keeps it honest.
@@ -361,8 +359,8 @@
         <p>
           Full-code scrutiny pass with robustness confirmed; the RDS county→direction
           backfill wired into the resolver; a pre-launch cloud bug caught where the
-          container defaulted to Tesseract instead of Vision; the cost reality established —
-          the legacy backlog is a Vision-budget decision, not an engineering gap — and an
+          container defaulted to Tesseract instead of Vision; the cost reality established
+          (the legacy backlog is a Vision-budget decision, not an engineering gap), and an
           autonomous Gemini free-tier cool-down scoped for the parts that are free-limited.
         </p>
       </div>
@@ -407,8 +405,8 @@
 
   <!-- ======= FOOTER ======= -->
   <footer class="footer">
-    <p class="footer-quote">"Neutral jing — you wait and listen before striking." — King Bumi</p>
-    <p>© 2026 Akshay Kumar Mundrathi · Written from the project's full arc, Jul 2025 – Jul 2026 — inherited prototype artifacts, 247 production commits, session logs, and correspondence</p>
+    <p class="footer-quote">"Neutral jing: you wait and listen before striking." - King Bumi</p>
+    <p>© 2026 Akshay Kumar Mundrathi · Written from the project's full arc (Jul 2025 – Jul 2026): inherited prototype artifacts, session logs, and correspondence</p>
   </footer>
 
   <script src="script.js"></script>
