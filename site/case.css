@@ -248,6 +248,25 @@
 }
 .case-end-cta { margin-top: 2.2rem; justify-content: flex-start; }
 
+/* — living journal — */
+.journal-entry {
+  background: #fffdf7;
+  border: 2px solid var(--earth-soft);
+  border-left: 5px solid var(--earth);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.1rem 1.3rem 1.2rem;
+  max-width: 760px;
+  margin-top: 1rem;
+  box-shadow: 0 2px 10px rgba(60, 45, 20, 0.08);
+}
+.journal-entry h3 { margin: 0.5rem 0 0.3rem; }
+.journal-entry h3 a { color: var(--ink); text-decoration: none; }
+.journal-entry h3 a:hover { color: var(--earth); text-decoration: underline; }
+.journal-entry p { color: var(--ink-soft); font-size: 0.95rem; }
+.journal-more { margin-top: 1.2rem; }
+.journal-more a { font-weight: 700; text-decoration: none; color: var(--earth); }
+.journal-more a:hover { text-decoration: underline; }
+
 @media (max-width: 560px) {
   .stat { min-width: 44%; }
   .case-end-cta { justify-content: center; }
