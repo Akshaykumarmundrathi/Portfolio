@@ -48,11 +48,13 @@
       <h1>Digitizing a Century of<br />Oklahoma Well Records</h1>
       <p class="hero-tag">
         571,446 scanned PDFs (1911–2024) → a live, self-correcting well map —
-        built by one graduate student and an AI coding agent on a 7.4&nbsp;GB laptop.
+        a research prototype inherited in August 2025 and carried to production
+        scale by one graduate student and an AI coding agent.
       </p>
       <p class="case-affil">
         Oklahoma State University, Boone Pickens School of Geology · DOE Award DE-FE0032362
-        (Anadarko Basin Carbon Management Hub) · Data: Devon Energy · May–July 2026
+        (Anadarko Basin Carbon Management Hub) · Data: Devon Energy ·
+        Aug 2025 – Jul 2026 (production repo: 247 commits, May–Jul 2026)
       </p>
 
       <div class="stat-strip">
@@ -96,42 +98,74 @@
   <section id="chronicle" class="section section-earth">
     <div class="zoom">
       <p class="section-kicker earth-text">Book of Earth · Chapter Two</p>
-      <h2>The Chronicle of the Build</h2>
-      <p class="section-sub">Nine phases, fifty-nine days, one design law.</p>
+      <h2>From Inherited Prototype to Production</h2>
+      <p class="section-sub">
+        Two researchers, two academic years, one design law. The git history (first commit
+        May 15, 2026) records only the final build phase — the real arc starts earlier.
+      </p>
 
       <ol class="timeline">
-        <li><span class="tl-date">May 15–23</span><h3>Foundation</h3>
+        <li><span class="tl-date">2024 – mid-2025</span><h3>Origins — the Prior Researcher</h3>
+          <p>An earlier PhD researcher builds the working prototype: the PLSS corner-coordinate
+          database (4,565,504 rows × 46 columns, integrating three geospatial sources down to
+          quarter-quarter squares), a Colab notebook using Google Vision to detect the
+          "spot well" grid, and a single-PDF extraction script with a folium map.
+          One document at a time.</p></li>
+        <li><span class="tl-date">Aug – Nov 2025</span><h3>Takeover &amp; Gap Analysis</h3>
+          <p>The current author takes over: months grinding through the inherited notebook and
+          reports. The core diagnosis — the prototype works on <em>one PDF at a time in Colab</em>:
+          no batch processing, no crash recovery, no state tracking, no cloud path. Cloud
+          engineering (AWS, S3, RDS) begins here.</p></li>
+        <li><span class="tl-date">~Jun – Dec 2025</span><h3>The Database Wall</h3>
+          <p>The 4.56M-row parquet PLSS database <strong>cannot be loaded</strong> in any free
+          environment — Colab sessions die, local memory falls short, six months of workarounds
+          fail. The fix is architectural: move the data to S3 and stand it up as
+          PostgreSQL/PostGIS on AWS RDS. The single unlock that makes coordinate resolution
+          possible at scale.</p></li>
+        <li><span class="tl-date">Dec 2025</span><h3>The Archive Arrives</h3>
+          <p>~571,000 scanned PDFs land in 13 ZIP archives — immediately exposing a century of
+          layout variation the single-form prototype had never seen. Months of studying PDF
+          structures era by era become the foundation of the era-aware design.</p></li>
+        <li><span class="tl-date">May 15–23, 2026</span><h3>Production Build Begins</h3>
           <p>Modular pipeline born: ZIP-native reading, per-record crash recovery, Vision OCR,
           six-method OpenCV grid detection. First large benchmark on 4,607 records — grid 100%,
           county 99%, dot 89%.</p></li>
-        <li><span class="tl-date">May 23–31</span><h3>Coordinate Resolution</h3>
+        <li><span class="tl-date">May 23–31, 2026</span><h3>Coordinate Resolution</h3>
           <p>A 4.56M-cell PLSS PostgreSQL database on AWS RDS; a multi-pass resolver with
           bilinear interpolation of the hand-drawn dot; portability hardening across the codebase.</p></li>
-        <li><span class="tl-date">May–June</span><h3>U-Net Dot Detector</h3>
+        <li><span class="tl-date">May–Jun 2026</span><h3>U-Net Dot Detector</h3>
           <p>643 hand-labeled dots train a 192×192 U-Net that replaces brittle classical CV —
           with regression-gated retraining that can't silently degrade accuracy.</p></li>
-        <li><span class="tl-date">Jun 8–12</span><h3>Hardening Sprints</h3>
+        <li><span class="tl-date">Jun 8–12, 2026</span><h3>Hardening Sprints</h3>
           <p>Every silent crash root-caused to 7.4&nbsp;GB of RAM. Sharded status saves, self-healing
           watchdogs, run-scoped resume — startup drops 12.6s → 2.1s.</p></li>
-        <li><span class="tl-date">Jun 10–13</span><h3>Human-in-the-Loop</h3>
+        <li><span class="tl-date">Jun 10–13, 2026</span><h3>Human-in-the-Loop</h3>
           <p>2,781 hand-reviewed forms become per-collection search envelopes. A public Verify/Fix
           panel on the map feeds a fully autonomous corrections loop: GitHub issue → Action →
           RDS re-resolution → republish. No human intervention.</p></li>
-        <li><span class="tl-date">Jun 13–16</span><h3>Data Integrity</h3>
+        <li><span class="tl-date">Jun 13–16, 2026</span><h3>Data Integrity</h3>
           <p>Seven-way reconciliation — disk ⇄ ZIPs ⇄ index ⇄ tracker ⇄ coordinates ⇄ S3 ⇄ site —
           deduplicated to one row per record, with non-destructive merge guards after two
           near-miss data-loss incidents.</p></li>
-        <li class="tl-highlight"><span class="tl-date">Jun 16</span><h3>The Breakthrough</h3>
+        <li class="tl-highlight"><span class="tl-date">Jun 16, 2026</span><h3>The Breakthrough</h3>
           <p>Modern digital-native records carry typed data: county decodes deterministically from
           the API number, ~31% print exact coordinates. The map jumps
           <strong>7,163 → 47,253 wells in one day — at $0</strong>.</p></li>
-        <li><span class="tl-date">Jun 16–20</span><h3>Precision &amp; Scale</h3>
+        <li><span class="tl-date">Jun 16–20, 2026</span><h3>Precision &amp; Scale</h3>
           <p>12,662 wells upgraded to exact printed coordinates; crash-proof chunk-chain campaigns;
           AWS Batch cloud run designed with a 1,000-vCPU quota approved; AAPG Bulletin manuscript drafted.</p></li>
-        <li><span class="tl-date">Jul 12</span><h3>Today</h3>
+        <li><span class="tl-date">Jul 2026</span><h3>Today</h3>
           <p><strong>51,559 wells live</strong> across all 77 counties — each pin linked to its
           original scan — with ~470K records awaiting the cloud run.</p></li>
       </ol>
+
+      <div class="case-callout">
+        <strong>The author's core contribution is the gap between the two eras:</strong> an
+        inherited one-PDF-at-a-time Colab prototype became a resumable, era-aware, cloud-deployed
+        production system — new infrastructure (S3 / RDS / Batch), the five-stage modular
+        pipeline, the state-tracking and crash-recovery machinery, per-decade structural insights
+        from studying half a million real forms, and the live self-correcting map.
+      </div>
     </div>
   </section>
 
@@ -237,6 +271,7 @@
       <h2>Scars &amp; Lessons</h2>
       <p class="section-sub">Every earthbender learns by taking a few hits.</p>
       <ol class="lesson-list">
+        <li><strong>Six months stuck on a database that wouldn't load</strong> — the inherited 4.56M-row parquet PLSS database exceeded every free environment; Colab died, local RAM fell short, half a year of workarounds failed. The fix was architectural: S3 for storage, PostgreSQL/PostGIS on RDS for querying. <em>When data outgrows an environment, stop optimizing the load and move the computation to the data — that wall is the moment a prototype must become infrastructure.</em></li>
         <li><strong>Two near-miss data losses</strong> — a script truncated the 514K-row tracker to 3,334 rows; another overwrote the coordinates file. Both recovered from backups, both answered with structural guards. <em>At half-million-record scale, merge tooling must be non-destructive by construction.</em></li>
         <li><strong>A cloud run would have shipped garbage</strong> — the container defaulted to the OCR engine proven inaccurate. Caught in a pre-launch scrutiny pass. <em>Audit runtime defaults against experimental findings before scaling.</em></li>
         <li><strong>148 counties in a 77-county state</strong> — unnormalized strings split entities on the public map. <em>Normalize at the publishing boundary, not just extraction.</em></li>
@@ -294,7 +329,7 @@
   <!-- ======= FOOTER ======= -->
   <footer class="footer">
     <p class="footer-quote">"Neutral jing — you wait and listen before striking." — King Bumi</p>
-    <p>© 2026 Akshay Kumar Mundrathi · Case study written from 247 commits of history</p>
+    <p>© 2026 Akshay Kumar Mundrathi · Written from the project's full arc, Aug 2025 – Jul 2026 — inherited prototype artifacts, 247 production commits, and session logs</p>
   </footer>
 
   <script src="script.js"></script>
