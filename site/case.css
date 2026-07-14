@@ -258,6 +258,54 @@
 }
 .case-end-cta { margin-top: 2.2rem; justify-content: flex-start; }
 
+/* — poster figure & links (Tulsa interlude) — */
+.poster-figure {
+  display: block;
+  margin: 1.1rem auto 0.3rem;
+  max-width: 540px;
+  text-decoration: none;
+  text-align: center;
+}
+.poster-figure img {
+  width: 100%;
+  display: block;
+  border: 3px solid var(--earth);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(60, 45, 20, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.poster-figure:hover img {
+  transform: scale(1.015);
+  box-shadow: 0 10px 26px rgba(60, 45, 20, 0.35);
+}
+.poster-figure-hint {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--earth);
+  margin-top: 0.45rem;
+}
+.poster-links {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.poster-links a { font-weight: 700; text-decoration: none; color: var(--earth); font-size: 0.9rem; }
+.poster-links a:hover { text-decoration: underline; }
+
+/* — required notices — */
+.funding-section { padding: 3.2rem 1.2rem; }
+.funding-section h2 { font-size: 1.4rem; }
+.smallprint {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  max-width: 860px;
+  margin-top: 0.8rem;
+  line-height: 1.55;
+}
+
 /* — living journal — */
 .journal-entry {
   background: #fffdf7;
