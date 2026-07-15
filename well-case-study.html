@@ -214,25 +214,58 @@
         <span class="tl-date">May 15, 2026</span> &nbsp;First commit of the production repository.
         Everything learned since July went into a modular pipeline: five extraction paths, one
         resumable ledger. In the first nine days it was benchmarked on 4,607 real records:
-        grid detection 100%, county 99%, dot 89%. The architecture is simple to draw and was
-        merciless to earn:
+        grid detection 100%, county 99%, dot 89%. The shape of the machine is simple to say
+        out loud. Earning it wasn't:
       </p>
-      <pre class="case-arch"><code>scanned PDF (ZIP / S3)
-  └─ PDFDocumentManager (cached page renders, 2× resolution)
-       ├─ latlong/   printed coordinates (decimal + DMS) - modern forms
-       ├─ grid/      anchor phrase → measured-envelope crop → CV ensemble
-       │               └─ era-aware form classifier
-       ├─ location/  STR extraction (per-era recipes → zones → full page)
-       ├─ county/    structural anchors → fuzzy match → Gemini fallback
-       └─ dot/       U-Net segmentation → PLSS quarter-quarter label
-  └─ processing_status.csv   (44-column resumable tracker)
-  └─ coord/plss_resolver     (RDS, 5-pass, county-pinned directions)
-  └─ build_map_data.py       → GitHub Pages interactive map</code></pre>
+
+      <div class="arch-flow">
+        <div class="arch-step">
+          <span class="arch-icon">📄</span>
+          <div>
+            <h3>A scanned page comes in</h3>
+            <p>Every PDF is rendered into a crisp, high-resolution image, whether it was
+            handwritten in 1911 or uploaded in 2024.</p>
+          </div>
+        </div>
+        <div class="arch-step">
+          <span class="arch-icon">🔍</span>
+          <div>
+            <h3>Five readers look at it</h3>
+            <p>Each hunts for the well's location a different way, so every era of form has
+            a path that works:</p>
+            <div class="arch-chips">
+              <span>Printed coordinates</span>
+              <span>The county</span>
+              <span>The legal description</span>
+              <span>The little grid</span>
+              <span>The hand-drawn dot</span>
+            </div>
+          </div>
+        </div>
+        <div class="arch-step">
+          <span class="arch-icon">🗺️</span>
+          <div>
+            <h3>Words become a location</h3>
+            <p>Whatever was read gets matched against 4.5 million land-survey cells, with the
+            county as the master clue, until it resolves to a latitude and longitude.</p>
+          </div>
+        </div>
+        <div class="arch-step">
+          <span class="arch-icon">🌱</span>
+          <div>
+            <h3>The map grows</h3>
+            <p>A ledger remembers every record's progress, so crashes resume instead of
+            restarting, and each publish can only add wells, never lose them.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="case-callout law-callout">
-        <strong>One design law, held everywhere:</strong> hints and priors <em>bound and order</em>
-        the search; they never terminate it. Every stage has a full-page fallback; suspect
-        detections are flagged, never silently trusted. This is why a century of layout drift
-        degraded results gracefully instead of breaking them.
+        <strong>One rule, held everywhere:</strong> a shortcut may say where to look first,
+        but it never gets to say "stop looking." If the expected spot comes up empty, the
+        whole page gets searched; if an answer looks doubtful, it's marked doubtful instead
+        of trusted. That's why a hundred years of changing forms bent the results without
+        ever breaking them.
       </div>
       <p class="case-prose">
         The build ran on an ordinary home laptop, and the laptop
