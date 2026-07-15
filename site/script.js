@@ -24,26 +24,29 @@ if (progressBar) {
 }
 
 // ===== Zoom-in on scroll =====
-const zoomEls = document.querySelectorAll(".zoom");
+// Reveal a section once ~22% of it (or of the viewport, whichever is smaller)
+// is on screen. Hide again only when it fully leaves, so the effect replays.
+// Plain scroll math instead of IntersectionObserver: with sections much taller
+// than the viewport, observer thresholds kept revealing content too late.
+const zoomEls = Array.from(document.querySelectorAll(".zoom"));
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      } else {
-        // remove so it zooms again when scrolled back — feels more alive
-        entry.target.classList.remove("visible");
-      }
-    });
-  },
-  // Tiny threshold + small bottom inset: tall sections (e.g. the case-study
-  // timeline) reveal as soon as they meaningfully enter the viewport, instead
-  // of waiting for 15% of a very tall element to be visible.
-  { threshold: 0.03, rootMargin: "0px 0px -40px 0px" }
-);
+function updateReveals() {
+  const vh = window.innerHeight;
+  zoomEls.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    const visiblePx = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    const needed = 0.22 * Math.min(r.height, vh);
+    if (visiblePx >= needed) {
+      el.classList.add("visible");
+    } else if (visiblePx <= 0) {
+      el.classList.remove("visible");
+    }
+  });
+}
 
-zoomEls.forEach((el) => observer.observe(el));
+window.addEventListener("scroll", updateReveals, { passive: true });
+window.addEventListener("resize", updateReveals, { passive: true });
+updateReveals();
 
 // ===== Swap nav brand text for photo once scrolled past the hero portrait =====
 const heroRing = document.querySelector(".hero-photo-ring");
