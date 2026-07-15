@@ -159,12 +159,31 @@
       </p>
       <p class="case-prose">
         <span class="tl-date">Dec 2025</span> &nbsp;Then the archive itself arrived: thirteen ZIP
-        files, ~571,000 scanned PDFs, 1911 to 2024. It immediately exposed the truth the
-        single-form prototype had never faced: <strong>a century of layout drift</strong>.
-        Grids in the top-left, bottom-left, top-middle, top-right. Descriptions in headers, in
-        blocks, beside the grid. Forms that promised printed coordinates and delivered a blank.
+        files, ~571,000 scanned PDFs, 1911 to 2024. They still sit on my D: drive, a century of
+        Oklahoma in thirteen folders. And they immediately exposed the truth the single-form
+        prototype had never faced: <strong>a hundred years of changing paperwork</strong>.
         I spent months just studying where things <em>sit</em> on these pages, era by era.
-        That study became the foundation of everything that followed.
+        Sorted into piles, the century looks like this:
+      </p>
+
+      <div class="era-strip">
+        <div class="era-card"><span class="era-years">1911–1925</span><span class="era-name">The faded years</span>
+          <p>Handwritten, browned, photographed off old paper. The grid hides in the bottom corner of a big form.</p></div>
+        <div class="era-card"><span class="era-years">1926–1940</span><span class="era-name">The hollow circles</span>
+          <p>The well is a little hollow "o" on the grid. A century later, it would blind a detector that had only ever seen filled dots.</p></div>
+        <div class="era-card"><span class="era-years">1941–1979</span><span class="era-name">The typewriter era</span>
+          <p>Wartime forms settle into a clean typed standard: grid top-left, description beside it. The pipeline's happiest decades.</p></div>
+        <div class="era-card"><span class="era-years">1980–2000</span><span class="era-name">The big-grid years</span>
+          <p>New agencies, bigger grids, more tables. The same dot, drawn a little differently, and the detector stumbles again.</p></div>
+        <div class="era-card"><span class="era-years">2001–2024</span><span class="era-name">Paper disappears</span>
+          <p>Typed reports with no grid at all. The location is written out in words, and the county hides inside the well's serial number.</p></div>
+      </div>
+
+      <p class="case-prose">
+        That study became the foundation of everything that followed. It also surfaced the
+        pattern that shaped the whole design: <strong>failures cluster by era, not at
+        random</strong>. A quirk breaks the same way across an entire decade, so fixing one
+        quirk fixes thousands of records at once.
       </p>
       <div class="case-callout">
         <span class="tl-date">Feb – Mar 2026</span> &nbsp;<strong>Interlude: Tulsa.</strong>
@@ -225,6 +244,14 @@
         Wi-Fi drops, shutdowns, and restarts. <span class="tl-date">Late May 2026</span> &nbsp;The
         same discipline went to the cloud, where the first cloud run put 2,439 more wells on
         the map while it was still going.
+      </p>
+      <p class="case-prose">
+        Building for crashes changed how I worked, too. One afternoon I left a self-healing
+        watchdog in charge and came back five hours later to a report it had written for me.
+        It had caught a quiet bug (a stale filter had been dropping valid wells from every
+        map build before it), re-run the old failures, and taken the map from 1,615 wells
+        to 4,778 in a single sitting. Reading a machine's honest summary of its own shift
+        is a strange kind of joy.
       </p>
       <p class="case-prose">
         The scariest moments weren't crashes. A consolidation script once truncated the

@@ -258,6 +258,36 @@
 }
 .case-end-cta { margin-top: 2.2rem; justify-content: flex-start; }
 
+/* — century-of-forms era strip — */
+.era-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  gap: 0.9rem;
+  margin: 1.5rem 0 1.4rem;
+}
+.era-card {
+  background: #fffdf7;
+  border: 2px solid var(--earth-soft);
+  border-top: 5px solid var(--earth);
+  border-radius: 10px;
+  padding: 0.95rem 1rem;
+  box-shadow: 0 2px 8px rgba(60, 45, 20, 0.07);
+}
+.era-years {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--earth);
+}
+.era-name {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0.1rem 0 0.35rem;
+}
+.era-card p { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.5; }
+
 /* — poster figure & links (Tulsa interlude) — */
 .poster-figure {
   display: block;
