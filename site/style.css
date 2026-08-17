@@ -205,6 +205,8 @@ a { color: var(--water); }
 .role-card p { color: var(--ink-soft); margin-top: 0.3rem; }
 .role-sep { color: var(--ink-soft); }
 .role-where { font-family: var(--font-body); font-size: 0.9rem; font-weight: 600; color: var(--ink-soft); }
+.aws-badge { width: 90px; height: auto; display: block; margin: 0.5rem 0 0.2rem; transition: transform 0.15s ease; }
+.aws-badge:hover { transform: scale(1.05); }
 .cert-list { list-style: none; margin-top: 0.4rem; }
 .cert-list li { margin: 0.35rem 0; }
 .cert-list a { font-weight: 600; text-decoration: none; }
